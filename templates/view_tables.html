@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Tables</title>
+    <style>
+        /* Add your CSS styles here */
+        /* Add your CSS styles here */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 12px;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+    </style>
+</head>
+<body>
+    <h2>Tables</h2>
+    <table>
+        <tr>
+            <th>Table Number</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <!-- Add more table headers as needed -->
+        </tr>
+        {% for table in tables %}
+            <tr>
+                <td>{{ table.tableNumber }}</td>
+                <td>{{ table.capacity }}</td>
+                <td>{{ table.status }}</td>
+                <!-- Add more table data as needed -->
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

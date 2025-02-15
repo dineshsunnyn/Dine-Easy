@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body   background="../static/css/images/Untitled design(2).png">
+    
+    <div class="wrap">
+    <div class="left-side">
+<img style="width: 500px;height: 550px;"src="../static/css/images/Untitled design(4).png" alt="MISSING JPG" />
+    </div>
+<div class="right-side">
+    <span class="text-with-border" >Dine Easy</span>
+    <form class="input-form" method="POST" action="{{url_for('login')}}">
+    <span> username </span>
+    <input type="text" name="cust_name" >
+    <br>
+    <span> password </span>
+    <input type="password" name="cust_pswd">
+    <br>
+    <!-- <span> phone </span>
+    <input type="text" name="cust_phn"> -->
+    <br>
+    <!-- <span> YOUR ROLE </span>
+    <select name="staff_role" id="tables">
+        <option value="waiter">waiter</option>
+        <option value="chef">chef</option>
+      </select> -->
+    <button class="startordering" type="submit"> LOGIN    !!!!</button></a>
+    </form>
+</div>
+</div>
+</body>

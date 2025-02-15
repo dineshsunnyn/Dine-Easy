@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Page</title>
+    <script src="https://kit.fontawesome.com/3e1aa45750.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ongoing_order.css') }}">
+</head>
+
+<style>
+
+    /* Add this to your CSS file or in a <style> tag within your HTML */
+
+.call-waiter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.call-waiter-button {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.call-waiter-button:hover {
+    background-color: #2980b9;
+}
+
+
+</style>
+<body>
+    <!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> -->
+    <!-- <i class="fa-regular fa-arrow-left"></i> -->
+    <a><i class="fa-solid fa-arrow-left fa-2xl" style="cursor:pointer;"></i></a>
+
+    <div class="orders">
+        
+        <p  style="letter-spacing: 3px;position: relative; left:22%;color: #c0965f;"><i class="fa-solid fa-bowl-rice fa-2xl" style="color: #183567;"></i></i> YOUR ONGOING ORDER's <i class="fa-solid fa-kitchen-set fa-2xl" style="color: #183567;"></i></p>
+        
+</div>
+    {% for item in data %}
+    {% for food in item %}
+        <div class="orders">
+            <div class="orders-left">
+                <p class="item-name">{{ food.itemName }}</p>
+                <p class="customer-request">Cusomer Request : {{ food.CustomerRequest }}</p>
+                <p class="kitchen-status">Kitchen Status : {{ food.KitchenStatus }}</p>
+            </div>
+            <div class="orders-right">
+                <p class="quantity">{{ food.Quantity }}  : Quantity</p>
+                <p class="price">{{ food.Price }} $ : Price</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+</body>
+
+<form class="call-waiter-form" method="POST" action="{{ url_for('call_waiter', reservedtable=tableid) }}" onsubmit="showAlert()">
+    <!-- <input type="text" name="tableid" placeholder="Enter Table ID" required> -->
+    <button class="call-waiter-button" type="submit">Call Waiter</button>
+</form>
+
+<form class="call-waiter-form" method="POST" action="{{ url_for('bill_please', reservedtable=tableid) }}" onsubmit="showAlert1()">
+    <!-- <input type="text" name="tableid" placeholder="Enter Table ID" required> -->
+    <button class="call-waiter-button" type="submit">Bill Please !!!</button>
+</form>
+
+
+<script>
+    function showAlert() {
+        alert('Waiter has been called! Please wait.');
+    }
+    function showAlert1() {
+        alert('Waiter will get the Bill.');
+    }
+</script>
+
+
+
+</html>
+

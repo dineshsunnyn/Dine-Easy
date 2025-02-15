@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Page</title>
+    <script src="https://kit.fontawesome.com/3e1aa45750.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ongoing_order.css') }}">
+</head>
+<body>
+    <!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> -->
+    <!-- <i class="fa-regular fa-arrow-left"></i> -->
+    <!-- <a><i class="fa-solid fa-arrow-left fa-2xl" style="cursor:pointer;"></i></a> -->
+    <div class="orders">
+        <p class="kitchen-status" style="font-size: 20px;color: rgb(231, 178, 3);position: relative;left:40%;">TABLE {{tableNumber}}</span> </p>
+    </div>
+    
+    <form method="POST" id="form1" action="{{ url_for('confirm_order',reservedtable=reservedtable,orderid=orderid) }}" onsubmit="return submitForm1(form1)">
+    <!-- {{data}} -->
+    {% if data %}
+
+    {% for food in data %}
+    <div class="orders">
+        <div class="orders-left">
+            <p class="item-name">{{ food.itemName }}</p>
+            <p class="customer-request">Customer Request : <input type="text" name='crequest-{{food.itemName}}' value="{{ food.CustomerRequest }}"></p>
+            <p class="kitchen-status">Kitchen Status : {{ food.KitchenStatus }}</p>
+        </div>
+        <div class="orders-right">
+            <p class="quantity">
+                <!-- <input  type="text" name="quantity-{{food.itemName}}"  value="{{food.Quantity}}" oninput="updateTotalPrice(this,{{ food.Price }},{{food.itemName}})" readonly> -->
+                <!-- Add an onchange attribute to trigger the JavaScript function when the value changes -->
+<input name='quantity-{{food.itemName}}' type="number" value={{food.Quantity}} min="0" id="{{food.itemName}}" onchange="updateQuantity(this)"> : Quantity
+
+            </p>
+            <!-- <p class="price" id="price{{ loop.index }}">{{ food.Price }} $ : Price</p>
+            <p class="price" id="{{food.itemName}}_total" value="{{ food.Price * food.Quantity}}">{{ food.Price * food.Quantity  }} $ : Total Item Value</p>
+             -->
+        </div>
+    </div>
+{% endfor %}
+
+<div class="orders">
+    <p class="kitchen-status">Total Price : <span id="totalprice">{{ totalprice }}</span> $</p>
+</div>
+<div class="orders">
+    <p class="kitchen-status" style="color: tomato;">ORDER ONCE PLACED CANNOT BE CANCELLED PLEASE RE-VERIFY THE ORDER BEFORE YOU PLACE IT</span> </p>
+</div>
+
+<button class="submit" type="submit" >CONFIRM ORDER</button> 
+
+</form>
+
+{% else %}
+<p>Your cart is empty</p>
+{% endif%}
+<script>
+            function submitForm1() {
+            // Perform actions for the first form submission
+            alert("Order has been confirmed, Will serve you in short !!!!");
+        }
+
+    function updateTotalPrice(input, unitPrice,itemname) {
+        const quantity = parseInt(input.value);
+        const totalPriceElement = document.getElementById(itemname+'_total');
+        // const currentTotalPrice = parseFloat(totalPriceElement.innerText);
+
+        // Update the total price based on the quantity change
+        const newTotalPrice = ((quantity) * unitPrice);
+        totalPriceElement.innerText = newTotalPrice.toFixed(2);
+
+    }
+    function updateQuantity(input) {
+        // Get the current value of the input
+        var newValue = input.value;
+
+        // Update the id attribute with the new value
+        input.setAttribute('id', newValue);
+    }
+
+</script>
+
+</div>
+
+</body>
+
+</html>
+

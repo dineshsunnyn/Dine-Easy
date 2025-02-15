@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Page</title>
+    <script src="https://kit.fontawesome.com/3e1aa45750.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ongoing_order.css') }}">
+    <style>
+        /* Add the following styles for the button */
+        .ready-button {
+            padding: 10px;
+            background-color: #4CAF50; /* Green color for 'Ready' status */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-button:disabled {
+            background-color: #ddd; /* Gray color for disabled state */
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .ready-button:hover:enabled {
+            background-color: #45a049; /* Darker green color on hover for enabled state */
+        }
+
+        .get-bill-button {
+            padding: 10px;
+            background-color: #007bff; /* Blue color for 'Get Bill' button */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+            letter-spacing: 0.5px;
+            left: 33%;
+            position: relative;
+            letter-spacing: 1px;
+            width: 30%;
+        }
+
+        .get-bill-button:disabled {
+            background-color: #ddd; /* Gray color for disabled state */
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .get-bill-button:hover:enabled {
+            background-color: #0056b3; /* Darker blue color on hover for enabled state */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> -->
+    <!-- <i class="fa-regular fa-arrow-left"></i> -->
+    <!-- {{data}} -->
+    <!-- <a><i class="fa-solid fa-arrow-left fa-2xl" style="cursor:pointer;"></i></a> -->
+    <!-- {{data}} -->
+<form method="POST" action="{{ url_for('food_status_modify',reservedtable=reservedtable) }}" >
+
+    <div class="orders">
+            <p  style="letter-spacing: 3px;position: relative; left:23%;color: #c0965f;"><i class="fa-solid fa-bowl-rice fa-2xl" style="color: #183567;"></i></i> FOOD TO BE PREPARED <i class="fa-solid fa-kitchen-set fa-2xl" style="color: #183567;"></i></p> 
+    </div>
+    <!-- {{data}} -->
+    {% for item in data %}
+    {% for food in item %}
+<!-- {{food}} -->
+        <div class="orders">
+            <div class="orders-left">
+
+                <p class="item-name">{{ food.itemName }}</p>
+                <p class="customer-request">Customer Request: {{ food.CustomerRequest }}</p>
+                <!-- <p class="customer-request">Customer Request: {{ food.kitchenStatus }}</p> -->
+
+                <label for="kitchen-status">Kitchen Status:</label>
+    
+    {% if food.KitchenStatus == 'Ready'%}
+   
+    <select name="kitchen-status-{{food.itemName}}" class="kitchen-status" disabled>
+        <!-- <option value="Serve Now" {% if food.KitchenStatus == 'Serve Now' %}selected{% endif %}>Serve Now</option> -->
+       
+        {% if food.KitchenStatus == 'Ready'%}
+        <option value="Ready" {% if food.KitchenStatus == 'Ready' %}selected{% endif %}>Ready</option>
+        <option value="Preparing" {% if food.KitchenStatus == 'Preparing' %}selected{% endif %}>Preparing</option>
+        <!-- <option value="Cancelled" >Cancelled</option> -->
+        <option value="Cancelled" {% if food.KitchenStatus == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+      
+        {% else %}
+        <option value="Preparing" {% if food.KitchenStatus == 'Preparing' %}selected{% endif %}>Preparing</option>
+        <option value="Ready" {% if food.KitchenStatus == 'Ready' %}selected{% endif %}>Ready</option>
+        <option value="Cancelled" {% if food.KitchenStatus == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+      
+      
+        <!-- <option value="Cancelled" >Cancelled</option> -->
+
+        {% endif %}
+        
+        <!-- Add more options as needed -->
+    </select>
+   
+    {% else%}
+    
+    <select name="kitchen-status-{{food.itemName}}" class="kitchen-status" >
+        <!-- <option value="Serve Now" {% if food.KitchenStatus == 'Serve Now' %}selected{% endif %}>Serve Now</option> -->
+        {% if food.KitchenStatus == 'Ready'%}
+        <option value="Ready" {% if food.KitchenStatus == 'Ready' %}selected{% endif %}>Ready</option>
+        <option value="Preparing" {% if food.KitchenStatus == 'Preparing' %}selected{% endif %}>Preparing</option>
+        <option value="Cancelled" {% if food.KitchenStatus == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+      
+        {% else %}
+        <option value="Preparing" {% if food.KitchenStatus == 'Preparing' %}selected{% endif %}>Preparing</option>
+        <option value="Ready" {% if food.KitchenStatus == 'Ready' %}selected{% endif %}>Ready</option>
+        <option value="Cancelled" {% if food.KitchenStatus == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+      
+        {% endif %}
+        <!-- Add more options as needed -->
+    </select>
+    
+    {%endif%}
+            </div>
+            <div class="orders-right">
+                <!-- None:{{food.KitchenStatus}} -->
+
+                <p class="quantity">Qty: {{ food.Quantity }}</p>
+                <!-- <p class="price">{{ food.Price }} $ : Price</p> -->
+                <input type="hidden" name="item_name-{{food.itemName}}" value="{{ food.itemName }}">
+                <input type="hidden" name="order_id" value="{{ food.oid }}">
+                {% if food.KitchenStatus=='Ready'%}
+                <button type="submit" class="ready-button" onclick="handleReadyButtonClick()" disabled>MODIFY</button>
+                {% else%}
+                <button type="submit" class="ready-button" onclick="handleReadyButtonClick()" >MODIFY</button>
+                {% endif%}
+                <!-- {% if food.KitchenStatus == 'Ready' %}
+                    <button class="ready-button" onclick="handleReadyButtonClick()">READY to SERVE</button>
+                {% else %}
+                    <button class="ready-button" disabled>YET to be PREPARED</button>
+                {% endif %} -->
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<script>
+    // Function to check if all orders are in 'Ready' state
+    function all_orders_ready(data) {
+        for (let item of data) {
+            for (let food of item) {
+                if (food.KitchenStatus !== 'Ready') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Function to handle button click for 'Ready' button
+    function handleReadyButtonClick() {
+        // Add your logic here for handling the 'Ready' button click
+        alert('Order is ready!');
+    }
+
+    // Function to handle button click for 'Get Bill' button
+    function handleGetBillButtonClick() {
+        // Add your logic here for handling the 'Get Bill' button click
+        alert('Getting the bill!');
+    }
+
+    // Function to refresh the page every 5 seconds
+    function refreshPage() {
+        location.reload();
+    }
+
+    // Set up the refresh interval
+    // setInterval(refreshPage, 5000);
+</script>
+
+
+</form>
+</body>
+</html>

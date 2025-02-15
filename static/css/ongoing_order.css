@@ -1,0 +1,85 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+}
+
+.orders {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-left: 25%;
+}
+
+.orders-left {
+    flex: 1;
+}
+
+.orders-right {
+    text-align: right;
+}
+
+.orders h3 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+
+.orders .customer-request,
+.orders .kitchen-status {
+    font-size: 16px;
+}
+
+.orders .item-name{
+    font-size: 20px;
+}
+.orders .quantity,
+.orders .price {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.orders .price {
+    color: #007bff;
+}
+
+.orders .customer-request {
+    font-style: italic;
+}
+
+.orders .kitchen-status {
+    color: #28a745;
+}
+
+
+.submit{
+    position: relative;
+    left:42%;
+    bottom:10%;
+    padding: 7px;
+    margin: 10px;
+   
+    outline: none;
+    background-color: #60b246;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    text-decoration: none;
+    border:1px solid white;
+    color: white;
+    /* letter-spacing: 0.5px; */
+    cursor: pointer;
+}
+
+.quantity-input {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #ccc;
+}

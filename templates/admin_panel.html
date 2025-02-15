@@ -1,0 +1,139 @@
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 50px;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Optional: Add hover effect to options */
+select option:hover {
+    background-color: #f5f5f5;
+}
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Admin Panel</h1>
+
+    <!-- Tables Section -->
+    <form id="tables-form" method='POST' class="admin-form" action="{{ url_for('modify_table' ) }}">
+        <h2>Tables</h2>
+        <label for="tables-action">Choose an action:</label>
+        <select id="tables-action" name="tables-action">
+            <option value="add-tables">Add</option>
+            <option value="delete-tables">Delete</option>
+            <option value="edit-tables">Edit</option>
+            <option value="view-tables">View</option>
+
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Waiters Section -->
+    <form id="staff-form" class="admin-form" action="{{ url_for('modify_staff' ) }}" method='POST'>
+        <h2>Staff</h2>
+        <label for="staff-action">Choose an action:</label>
+        <select id="staff-action" name="staff-action">
+            <option value="add-satff">Add</option>
+            <option value="delete-staff">Delete</option>
+            <option value="edit-staff">Edit</option>
+            <option value="view-staff">View</option>
+
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Menu Section -->
+    <form id="menu-form" method='POST' class="admin-form" action="{{ url_for('modify_menu' ) }}">
+        <h2>Menu</h2>
+        <label for="menu-action">Choose an action:</label>
+        <select id="menu-action" name="menu-action">
+            <option value="add-menu">Add</option>
+            <option value="delete-menu">Delete</option>
+            <option value="edit-menu">Edit</option>
+            <option value="view-menu">View</option>
+
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Category Section -->
+    <form id="category-form"  method='POST' class="admin-form" action="{{ url_for('modify_category' ) }}">
+        <h2>Category</h2>
+        <label for="category-action">Choose an action:</label>
+        <select id="category-action" name="category-action">
+            <option value="add-category">Add</option>
+            <option value="delete-category">Delete</option>
+            <option value="edit-category">Edit</option>
+            <option value="view-category">View</option>
+            
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- VIEW Section -->
+    <form id="order-form"  method='GET' class="admin-form" action="{{ url_for('view_orders_admin' ) }}">
+        <h2>Order</h2>
+        <label for="order-action">Choose an action:</label>
+        <select id="order-action" name="order-action">
+            <option value="view-order">View</option>
+            <!-- <option value="delete-category">Delete</option> -->
+            <!-- <option value="edit-category">Edit</option> -->
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Page</title>
+    <script src="https://kit.fontawesome.com/3e1aa45750.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ongoing_order.css') }}">
+    <style>
+        /* Add the following styles for the button */
+        .ready-button {
+            padding: 10px;
+            background-color: #4CAF50; /* Green color for 'Ready' status */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-button:disabled {
+            background-color: #ddd; /* Gray color for disabled state */
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .ready-button:hover:enabled {
+            background-color: #45a049; /* Darker green color on hover for enabled state */
+        }
+
+        .get-bill-button {
+            padding: 10px;
+            background-color: #007bff; /* Blue color for 'Get Bill' button */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+            letter-spacing: 0.5px;
+            left: 33%;
+            position: relative;
+            letter-spacing: 1px;
+            width: 30%;
+        }
+
+        .get-bill-button:disabled {
+            background-color: #ddd; /* Gray color for disabled state */
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .get-bill-button:hover:enabled {
+            background-color: #0056b3; /* Darker blue color on hover for enabled state */
+        }
+
+        
+    table {
+        border-collapse: collapse;
+        width: 100%;
+         width:40%;
+        left:26%;
+        position: relative;
+        outline: none;
+    }
+
+    th, td {
+        /* border: 1px solid #dddddd; */
+        text-align: left;
+        padding: 8px;
+        width:100px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    </style>
+</head>
+<body>
+
+    <!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> -->
+    <!-- <i class="fa-regular fa-arrow-left"></i> -->
+    <!-- {{data}} -->
+    <!-- <a><i class="fa-solid fa-arrow-left fa-2xl" style="cursor:pointer;"></i></a> -->
+    <!-- {{data}} -->
+    <form methods="GET" >
+
+    <!-- {{data}} -->
+
+    <!-- {{data}} -->
+    <div class="orders">
+        
+            <p  style="letter-spacing: 3px;position: relative; left:23%;color: #c0965f;"><i class="fa-regular fa-credit-card fa-2xl" style="color: #0a337b;"></i></i> YOUR BILL </p>
+            
+    </div>
+
+    {%set total_price=0%}
+
+
+    <table>
+    <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <!-- <th>Total</th> -->
+
+    </tr>
+    {% for item in data %}
+    <!-- {{item}} -->
+    {% for food in item %}
+    
+        <!-- <div class="orders"> -->
+            <table>
+                
+                <tr>
+                    <td>{{ food.itemName }}</td>
+                    <td>{{ food.Quantity }}</td>
+                    <td>{{ food.Price }}</td>
+                    <td>{{ food.Price * food.Quantity }}</td>
+                    <!-- {% set individual_price=(food.Price|float) * food.Quantity%}
+                    {% set total_prices =individual_price + total_price %}-->
+                    <!-- <td>{{total_cost}}</td>  -->
+                </tr>
+            </table>      
+        <!-- </div> -->
+    {% endfor %}
+{% endfor %}
+    <!-- {% set total_price=total_price %} -->
+    <table>
+<th> TOTAL COST : {{ total_cost }}</th>
+</table>  
+</table>
+<br>
+
+<!-- <button type="submit" id="get-bill-button" class="get-bill-button" >BILL PAID</button> -->
+
+</form>
+</body>
+</html>

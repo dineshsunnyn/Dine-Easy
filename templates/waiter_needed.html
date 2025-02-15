@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Display</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .table-card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 20px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .ready-button {
+            padding: 10px;
+            background-color: #4CAF50; /* Green color for 'Ready' status */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+            letter-spacing: 0.5px;
+        }
+
+
+        .ready-button:hover:enabled {
+            background-color: #45a049; /* Darker green color on hover for enabled state */
+        }
+
+        .table-card:hover {
+            transform: scale(1.05);
+        }
+
+        .table-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .table-status {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #4CAF50; /* Green color for occupied status */
+        }
+
+        .waiter-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .waiter-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Replace the data with your actual data -->
+<form method="POST" action="{{ url_for('waiter_delivery',staffid=staffid) }}" >
+    {% for table in tables %}
+        <div class="table-card">
+            <p class="table-number">Table {{ table.tableNumber }}</p>
+            <p>Ongoing Orders: {{ table.Orders|length }}</p>
+            <!-- <p class="table-status">Status: {{ table.status }}</p> -->
+            <input type="hidden" name="selected_table_id" value="{{ table._id }}">
+    {% if table.Orders|length > 0 %}
+            <button class="waiter-button" type="submit" >Pick Up Table</button>
+   
+        {%endif %}
+
+            {% if table.calling  %}
+                    <p class="ready-button" >CUSTOMER IS CALLING</p>
+            {% endif %}
+            {% if table.bill  %}
+                    <p class="ready-button" >BILL PLEASE</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</form >
+    <script>
+        function pickUpTable(waiterid,staffid) {
+            // Implement the logic to handle picking up the table
+            // You can use AJAX or other techniques to communicate with the server
+            // and update the waiter for the selected table
+            if (waiterid.toString() === staffid.toString()) {
+            // Both IDs are the same
+            console.log('Waiter and Staff IDs are the same.');
+            return true;
+        } else {
+            // IDs are different, show an alert
+            alert('TABLE IS PICKED BY SOME OTHER WAITER');
+            return false;
+        }
+            console.log('Table picked up:', tableId);
+        }
+    </script>
+</body>
+</html>

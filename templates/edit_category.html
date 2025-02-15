@@ -1,0 +1,16 @@
+<!-- edit_category.html -->
+<div class="container">
+    <h2>Edit Category</h2>
+    <form id="edit-category-form" class="admin-form" action="{{ url_for('edit-fetched-category') }}" method="POST">
+        <!-- Add your form fields for editing categories here -->
+        <label for="category-name">Category Name:</label>
+        <input type="text" id="category-name" name="category-name" value="{{ category.Name }}" required>
+
+        <label for="category-image-url">Category Image URL:</label>
+        <input type="text" id="category-image-url" name="category-image-url" value="{{ category.ImageURL }}" required>
+
+        <!-- Add more fields as needed -->
+
+        <button type="submit">Update Category</button>
+    </form>
+</div>

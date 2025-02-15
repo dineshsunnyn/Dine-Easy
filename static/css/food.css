@@ -1,0 +1,162 @@
+body{
+    font: 100px;
+    background-color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.items{
+    width:300px;
+    min-height: 300px;
+    /* background: red; */
+    padding: 10px;
+    border-radius: 15px;
+    float: left;
+    box-shadow: 0 0 0 transparent;
+
+    /* Transition for smooth animation */
+    transition: box-shadow 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.items:hover{
+    background: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+
+}
+
+.individual-item{
+    
+    background: pink;
+    margin: 100px auto;
+    max-width: 970px;
+    align-items: center;
+}
+
+.food{
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    width: 300px;
+}
+
+.tasteit{
+    background: Tomato;
+    border-style: none;
+    border: 1px solid black;
+    padding: 10px;
+    width: 70px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+.rating-price{
+    flex: 1;
+    
+    position: static;
+    /* background-color: aqua; */
+    
+}
+
+.quantity{
+    /* background: yellow; */
+    width: 100px;
+    margin: auto 100px;
+    /* justify-content: center; */
+}
+
+.quantity a{
+    background: tomato;
+    padding: 3px 7px 3px 7px; 
+    border-radius: 3px;
+}
+
+.menu{
+    max-height: 350px;
+    background: #f8f8f8;
+    float: left;
+    margin: 50px auto;
+    min-width: 310px;
+    /* display: block; */
+    padding-top: 35px;
+    padding-left: 51px;
+    
+}
+
+.menu a{
+    margin: auto auto;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    color: black;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+.cusine-image{
+    max-width: 200px;
+    max-height: 200px;
+    /* padding-bottom: 8px; */
+    border-radius: 10%;
+    
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.cusine-name{
+    background-color: red;
+    margin: auto 100px;
+}
+
+.footer{
+    background-color: #60b246;
+    position: fixed;
+    width: 50%;
+    left:25%;
+    bottom: 0%;
+    min-height: 50px;
+       
+}
+
+.submit{
+    position: relative;
+    left:18%;
+    bottom:10%;
+    padding: 7px;
+    margin: 10px;
+   
+    outline: none;
+    background-color: #60b246;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    text-decoration: none;
+    border:1px solid white;
+    color: white;
+    /* letter-spacing: 0.5px; */
+    cursor: pointer;
+}
+
+.ongoing{
+    display: flex;
+    /* left:18%; */
+    bottom:30%;
+    position: relative;
+
+    
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Scanner</title>
+</head>
+<body>
+    <div id="qrcode">
+
+        <img src="./qr-code.png" / style="width:300px;height:300px;">
+    </div>
+    <script src="qrcode.min.js"></script>
+    <script>
+        // Generate and display the QR code
+        const qrCode = new QRCode(document.getElementById("qrcode"), {
+            text: "http://127.0.0.1:5000/home/652340c92e184fb12c237390",
+            width: 128,
+            height: 128
+        });
+
+        // Listen for QR code scans
+        const video = document.createElement("video");
+        const canvasElement = document.getElementById("canvas");
+        const canvas = canvasElement.getContext("2d");
+
+        // Use the GetUserMedia API to access the camera
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
+            video.srcObject = stream;
+            video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+            video.play();
+            requestAnimationFrame(tick);
+        });
+
+        function tick() {
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvasElement.hidden = false;
+                canvasElement.height = video.videoHeight;
+                canvasElement.width = video.videoWidth;
+                canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+                const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+                if (code) {
+                    // Handle the QR code data (e.g., perform redirection)
+                    window.location.href = "https://www.redirectedwebsite.com";
+                }
+
+                // Continue scanning
+                requestAnimationFrame(tick);
+            }
+        }
+    </script>
+</body>
+</html>

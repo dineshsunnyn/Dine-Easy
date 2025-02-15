@@ -1,0 +1,78 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+div {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Orders</title>
+    <!-- Add your CSS styles here if needed -->
+</head>
+<body>
+    <h1> Order's</h1>
+
+    {% for order in orders %}
+        <div>
+            <p>Order ID: {{ order['_id'] }}</p>
+            <p>Table ID: {{ order['table_id'] }}</p>
+            <p>Customer ID: {{ order['cust_id'] }}</p>
+            <p>Order DateTime: {{ order['datetime'] }}</p>
+            <h3>Items:</h3>
+            <ul>
+                {% if order['items'] %}
+ 
+                {% for item in order['items'] %}
+                    <li>
+                        <p>Item Name: {{ item['itemName'] }}</p>
+                        <p>Quantity: {{ item['Quantity'] }}</p>
+                        <p>Price: {{ item['Price'] }}</p>
+                        {%if item['KitchenStatus']!='Ready'%}
+                            <p>Status: On Going</p>
+                        {%else%}
+                        <p>Status: Completed</p>
+
+                        {%endif%}
+                    </li>
+                {% endfor %}
+    {%endif%}
+
+            </ul>
+            <p>Total Price: {{ order['totalPrice'] }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>

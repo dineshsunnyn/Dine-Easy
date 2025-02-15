@@ -1,0 +1,194 @@
+
+
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Restaurant Menu</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/food.css') }}">
+    <script src="https://kit.fontawesome.com/3e1aa45750.js" crossorigin="anonymous"></script>
+    <script>
+        
+    </script>
+</head>
+ <body>
+    <span style="margin:35px auto;font-size:50px;width:100%;display:block;font-weight:50;font-family:Verdana, Geneva, Tahoma, sans-serif;">Delicio<i class="fa-solid fa-mug-hot"></i>s and <i class="fa-solid fa-martini-glass-citrus"></i>ummy...... </span>
+    <!-- <i class="fa-solid fa-bowl-food fa-beat-fade"></i> -->
+    {% for item in data%}
+    <div class="menu">
+        <div class="cusine-name">
+</div>
+<div class="cusine-image-div">
+    <a href="{{url_for('homepage',cusineid=item.cuisineid,reservedtable=additional_data)}}"> {{ item.cuisinename }}</a>
+    <!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> -->
+     <img class="cusine-image" src="{{item.imageUrl}}" >
+    </div>
+    </div>
+    {% endfor %}
+    <span style="text-align:center;font-size:35px;width:100%;display:block;font-weight:30;font-family:Verdana, Geneva, Tahoma, sans-serif;">Tasting be<i class="fa-solid fa-pizza-slice"></i>ins here......<i class="fa-solid fa-pepper-hot"></i></span><br>
+    <span style="text-align:center;font-size:35px;width:100%;display:block;font-weight:30;font-family:Verdana, Geneva, Tahoma, sans-serif;">TABLE : {{tableNumber}}</span>
+
+    <div style="flex-grow: 1;">
+     <form method="POST" action="{{ url_for('review_order',reservedtable=additional_data) }}">
+         <!-- <ul> -->
+             {% for item in food %}
+             <!-- <li> -->
+            {% if item.cusineid!=prev_item_cusine_id %}
+
+            {%set cusineid_not_same=True%}
+
+            {% endif%}
+
+                <div class="individual-item">
+
+                <div class="items">
+                <img style="max-width: 100%;max-height: 250px;padding-bottom: 8px;" src="{{item.imageUrl}}" >
+                <div style="display: flex;width: max-content; min-height: 100px;">
+                <div class="name-desc" style="flex: 1;width: 100%;">
+                 <span style="min-width: auto;font-size: 18px;font-family:Verdana, Geneva, Tahoma, sans-serif;letter-spacing: 0px;display: inline-block;white-space: nowrap;
+                 overflow: hidden;
+                 text-overflow: ellipsis;">{{ item.Name }}</span> <br><br>
+                <span style="display: inline-block;white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 14px;font-family:Verdana, Geneva, Tahoma, sans-serif; width: 150px;">{{item.description}}</span>
+            </div>
+            <div class="rating-price" style="flex: 1;">
+                
+                 {%if item.rating|float > 4.0 %}
+                 <span style="position:relative;left:50%;background:green;padding: 5px;border-radius: 7px;font-weight: bold;color: white; ">{{item.rating}} <i class="fa-solid fa-star fa-flip"></i></i></span>
+                 {%elif item.rating|float > 3.0 %}
+                 <span style="position:relative;left:50%;background:orange;padding: 5px;border-radius: 7px;font-weight: bold;color: white;">{{item.rating}} <i class="fa-solid fa-star fa-flip"></i></i></span>
+                 {%else%}
+                 <span style="position:relative;left:50%;background:red;padding: 5px;border-radius: 7px;font-weight: bold;color: white;">{{item.rating}} <i class="fa-solid fa-star fa-flip"></i></i></span>
+                {% endif %} <br><br>
+                <span style="margin-top:10px;position: relative;left: 50%;font-size: 20px;font-family:Okra, Helvetica, sans-serif ; letter-spacing: 0.5px;">{{item.Price}} <i class="fa-solid fa-sack-dollar"></i></span>
+            </div>
+        </div>
+                 <!-- <input type="hidden" name="quantity-{{ item._id }}" value="0" min="0" class="{{item.Name}}">
+                 <input type="hidden" name="cuisineid" value="{{item.cusineid}}"> -->
+                
+                 <div class="quantity">
+                    <a  onclick="decrementQuantity('{{item.Name}}')">-</a>
+                    <input style="text-decoration: none;outline: none;border: none;background: none;width: 13px;" type="text" name="quantity-{{item.Name}}" id="{{item.Name}}" value="0" readonly>
+                    <a onclick="incrementQuantity('{{item.Name}}')">+</a>
+                </div>
+            </div>
+                
+                </div>
+                
+                {%if cusineid_not_same%}
+                <!-- <div>
+                    <hr>
+                </div>
+                 -->
+                {%endif%}
+            {% set prev_item_cusine_id=item.cusineid%}
+             <!-- </li> -->
+             {% endfor %}
+         <!-- </ul> -->
+
+<footer class="footer">
+    
+    <!-- <form id="form3" onsubmit="return confirmorderform(form3)"> -->
+    <!-- <button  class="submit" type="submit" >VIEW ORDER</button> -->
+    <!-- </form> -->
+
+    <!-- <button class="submit" type="submit" >CHECKOUT</button>  -->
+    <!-- <a id="form2" method="GET" href="{{ url_for('review_order',reservedtable=additional_data) }}" onsubmit="return submitForm2(form2)"> -->
+        <button class="submit" type="submit" >REVIEW ORDER</button> 
+    <!-- </a> -->
+
+</footer>
+     </form>
+    </div>
+    
+    <form class="ongoing" id="form1" method="GET" action="{{ url_for('ongoing_order',reservedtable=additional_data)}}" onsubmit="return submitForm1(form1)">
+        <button class="submit" type="submit" >YOUR ORDER's</button> 
+    </form>
+
+    <div id="myModal" class="modal">
+        <p>Processing your request...</p>
+    </div>
+
+    <script>
+
+function confirmorderform(form3) {
+        // Perform any actions needed before submitting form2
+        // Example: fetchData();
+        document.getElementById(form3).submit();
+    }
+        
+
+// function submitForm1(form1) {
+//         // Perform any actions needed before submitting form2
+//         // Example: fetchData();
+//         document.getElementById(form1).submit();
+//     }
+
+    function submitForm2(form2) {
+        // Perform any actions needed before submitting form2
+        // Example: fetchData();
+        document.getElementById(form2).submit();
+    }
+
+        function showAlert(message) {
+            window.alert(message);
+        }
+
+        function fetchData() {
+            $.ajax({
+                url: '/review_order',
+                type: 'GET',
+                success: function(response) {
+                    // Update the content on the page with the retrieved data
+                    $('#result').text(response.data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function submitForm1() {
+            // Perform actions for the first form submission
+            alert("Form 1 submitted!");
+        }
+
+    </script>
+
+     <script>
+        let quantity = 1; // Initial quantity
+
+        // JavaScript function to add the product to the cart
+        // function addToCart() {
+        //     // Create a new list item for the cart
+        //     const cartItem = document.createElement("li");
+        //     cartItem.textContent = `Product Name - $${(19.99 * quantity).toFixed(2)}`; // Calculate the total price
+
+        //     // Add the item to the cart list
+        //     document.getElementById("cart-items").appendChild(cartItem);
+        // }
+
+        // JavaScript function to increment quantity
+        function incrementQuantity(itemName) {
+            quantity++;
+            var val=parseInt(document.getElementById(itemName).value);
+            // document.getElementById(itemName).textContent = val+1;
+            document.getElementById(itemName).value = val+1;
+        }
+
+        // JavaScript function to decrement quantity
+        function decrementQuantity(itemName) {
+            if (parseInt(document.getElementById(itemName).value) >= 1) {
+                var val=parseInt(document.getElementById(itemName).value);
+                // document.getElementById(itemName).textContent = val-1;
+                document.getElementById(itemName).value = val-1;
+            }
+        }
+    </script>
+
+
+ </body>
+ </html>
+ 

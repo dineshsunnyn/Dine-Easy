@@ -1,0 +1,13 @@
+<!-- delete_category.html -->
+<div class="container">
+    <h2>Delete Category</h2>
+    <form id="delete-category-form" class="admin-form" action="{{ url_for('delete_category') }}" method="POST">
+        <!-- Add your form fields for deleting categories here -->
+        <label for="category-name">Category Name:</label>
+        <input type="text" id="category-name" name="category-name" required>
+
+        <!-- Add more fields as needed -->
+
+        <button type="submit">Delete Category</button>
+    </form>
+</div>

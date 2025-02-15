@@ -1,0 +1,16 @@
+<!-- add_category.html -->
+<div class="container">
+    <h2>Add Category</h2>
+    <form id="add-category-form" class="admin-form" action="{{ url_for('add_category') }}" method="POST">
+        <!-- Add your form fields for adding categories here -->
+        <label for="category-name">Category Name:</label>
+        <input type="text" id="category-name" name="category-name" required>
+
+        <label for="category-image-url">Category Image URL:</label>
+        <input type="text" id="category-image-url" name="category-image-url" required>
+
+        <!-- Add more fields as needed -->
+
+        <button type="submit">Add Category</button>
+    </form>
+</div>

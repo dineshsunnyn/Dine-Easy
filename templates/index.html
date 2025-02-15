@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    {% for item in data%}
+    <div class="menu">
+        
+      <a href="{{url_for('getfood',cusineid=item.cuisineid,reservedtable=additional_data)}}"> {{ item.cuisinename }}</a>
+        
+    </div>
+    {% endfor %}
+</body>
+
+</html>
+
